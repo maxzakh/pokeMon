@@ -49,7 +49,7 @@ var pokemonRepository = (function () {
     };
 
     function addListItem(pokemon) {
-        var $button = $('<button class="pokeDex">' + pokemon.name +'</button>');
+        var $button = $('<button class="pokeDex">' + pokemon.name + '</button>');
 
         var $listItem = $('<li>' + '</li>');
         $pokeList.append($listItem);
@@ -61,7 +61,7 @@ var pokemonRepository = (function () {
     };
 
     function showDetails(pokemon) {
-        pokemonRepository.loadDetails(pokemon).then(function () {
+        pokemonRepository.loadDetails(pokemon).then(function() {
             console.log(pokemon);
             pokemonRepository.showModal(pokemon.name, pokemon.imageUrl);
         });
@@ -72,17 +72,15 @@ var pokemonRepository = (function () {
     };
 
     function loadList() {
-        $.ajax(apiUrl, { dataType: 'json' }).then(function (responseJSON) {
-            return(responseJSON);
-        }).then(function (responseJSON) {
-            responseJSON.each(function (response) {
-                response.results.each(function (pokemon) {
-                    var pokemon = {
-                        name: $(this).attr("name"),
-                        detailsUrl: $(this).attr("url")
-                    };
-                    add(pokemon)
-                });
+        return $.ajax(apiUrl, { dataType: 'json' }).then(function (responseJSON) {
+            return responseJSON;
+        }).then(function (response) {
+            $.each(response.results, function (pokemon, item) {
+                var pokemon = {
+                    name: item.name,
+                    detailsUrl: item.url
+                };
+                add(pokemon)
             });
         }).catch(function (e) {
             console.error(e);
@@ -91,16 +89,16 @@ var pokemonRepository = (function () {
 
     function loadDetails(item) {
         var url = item.detailsUrl;
-        $.ajax(url, {dataType: 'json'}).then(function (responseJSON) {
-            return(responseJSON);
-        }).then(function(responseJSON) {
+        $.ajax(url, { dataType: 'json' }).then(function (responseJSON) {
+            return (responseJSON);
+        }).then(function (item) {
             item.imageUrl = details.sprites.front_default;
             item.height = details.height;
             item.types = object.keys(details.types);
-        }).catch(function(e) {
+        }).catch(function (e) {
             console.error(e);
         });
-    }
+    };
 
     return {
         add: add,
@@ -114,8 +112,8 @@ var pokemonRepository = (function () {
     };
 })();
 
-pokemonRepository.loadList().then(function() {
-    pokemonRepository.getAll().each(function(pokemon) {
+pokemonRepository.loadList().then(function () {
+    pokemonRepository.getAll().forEach(function (pokemon) {
         pokemonRepository.addListItem(pokemon);
     });
 });
