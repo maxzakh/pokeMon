@@ -89,8 +89,8 @@ var pokemonRepository = (function () {
 
     function loadDetails(item) {
         var url = item.detailsUrl;
-        $.ajax(url, { dataType: 'json' }).then(function (responseJSON) {
-            return (responseJSON);
+        return $.ajax(url, { dataType: 'json' }).then(function (responseJSON) {
+            return responseJSON;
         }).then(function (item) {
             item.imageUrl = details.sprites.front_default;
             item.height = details.height;
