@@ -28,11 +28,11 @@ var pokemonRepository = (function () {
         $modalContainer.append($modal);
 
         $modalContainer.addClass("is-visible");
-    }
+    };
 
     function hideModal() {
         $modalContainer.removeClass("is-visible");
-    }
+    };
 
     $(window).on("keydown", (e) => {
         if (e.key === "Escape" && $modalContainer.hasClass("is-visible")) {
@@ -73,15 +73,16 @@ var pokemonRepository = (function () {
 
     function loadList() {
         $.ajax(apiUrl, { dataType: 'json' }).then(function (responseJSON) {
-            console.log(responseJSON);
             return(responseJSON);
         }).then(function (responseJSON) {
-            responseJSON.each(function (i) {
-                var pokemon = {
-                    name: $(this).attr("name"),
-                    detailsUrl: $(this).attr("url")
-                };
-                add(pokemon);
+            responseJSON.each(function (response) {
+                response.results.each(function (pokemon) {
+                    var pokemon = {
+                        name: $(this).attr("name"),
+                        detailsUrl: $(this).attr("url")
+                    };
+                    add(pokemon)
+                });
             });
         }).catch(function (e) {
             console.error(e);
