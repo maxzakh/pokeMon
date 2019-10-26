@@ -91,10 +91,10 @@ var pokemonRepository = (function () {
         var url = item.detailsUrl;
         return $.ajax(url, { dataType: 'json' }).then(function (responseJSON) {
             return responseJSON;
-        }).then(function (item) {
+        }).then(function (details) {
             item.imageUrl = details.sprites.front_default;
             item.height = details.height;
-            item.types = object.keys(details.types);
+            item.types = Object.keys(details.types);
         }).catch(function (e) {
             console.error(e);
         });
