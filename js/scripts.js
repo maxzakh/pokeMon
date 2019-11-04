@@ -12,7 +12,7 @@ var pokemonRepository = (function () {
 
         var $modal = $('.modal-body');
 
-        var $closeButtonElement = $('close');
+        var $closeButtonElement = $('.close');
         $closeButtonElement.on('click', function (event) {
             hideModal();
         })
