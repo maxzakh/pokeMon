@@ -10,14 +10,15 @@ var pokemonRepository = (function () {
     function showModal(title, text) {
         $modalContainer.html("");
 
-        var $modal = $('.modal-dialog-centered');
+        var $modal = $('.modal-dialog');
 
-        var $closeButtonElement = $('.modal-close');
+        var $closeButtonElement = $('close');
         $closeButtonElement.on('click', function (event) {
             hideModal();
         })
 
-        var $titleElement = $('<h1>' + title + '</h1>');
+        var $titleElement = $('.modal-title');
+        $titleElement.append(title);
 
         var $contentElement = $('<img>');
         $contentElement.attr("src", text);
