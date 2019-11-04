@@ -6,8 +6,9 @@ body {
     list-style-type: none;
 }
 
-.pokeDex {
+.btn {
     width: 6em;
+    padding: .375rem;
     background-color: #9eefd3ff;
 }
 
@@ -33,14 +34,10 @@ body {
   }
   
   .modal {
-    margin: auto;
-    display: inline-block;
-    box-sizing: border-box;
+    margin: 0 auto;
+    display: block;
     background: #fff;
     padding: 15px;
-    width: 100%;
-    max-width: 700px;
-    text-align: left;
   }
   
   .modal-close {

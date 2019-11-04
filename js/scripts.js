@@ -10,7 +10,7 @@ var pokemonRepository = (function () {
     function showModal(title, text) {
         $modalContainer.html("");
 
-        var $modal = $('<div class="modal"></div>');
+        var $modal = $('<div class="modal-dialog-centered"></div>');
 
         var $closeButtonElement = $('<button class="modal-close"></div>');
         $closeButtonElement.on('click', function (event) {
@@ -49,7 +49,7 @@ var pokemonRepository = (function () {
     };
 
     function addListItem(pokemon) {
-        var $button = $('<button class="pokeDex">' + pokemon.name + '</button>');
+        var $button = $('<button class="btn pokeDex">' + pokemon.name + '</button>');
 
         var $listItem = $('<li>' + '</li>');
         $pokeList.append($listItem);
