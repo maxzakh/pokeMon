@@ -8,14 +8,13 @@ var pokemonRepository = (function () {
     var $modalContainer = $("#modal-container");
 
     function showModal(title, text) {
-        $modalContainer.html("");
 
         var $modal = $('.modal-body');
 
-        var $closeButtonElement = $('.close');
-        $closeButtonElement.on('click', function (event) {
-            hideModal();
-        })
+        // var $closeButtonElement = $('.modal-close');
+        // $closeButtonElement.on('click', function (event) {
+        //     hideModal();
+        // })
 
         var $titleElement = $('.modal-title');
         $titleElement.append(title);
@@ -23,10 +22,10 @@ var pokemonRepository = (function () {
         var $contentElement = $('<img>');
         $contentElement.attr("src", text);
 
-        $modal.append($closeButtonElement);
-        $modal.append($titleElement);
+        // $modal.append($closeButtonElement);
+        // $modal.append($titleElement);
         $modal.append($contentElement);
-        $modalContainer.append($modal);
+        // $modalContainer.append($modal);
 
         $modalContainer.addClass("is-visible");
     };
