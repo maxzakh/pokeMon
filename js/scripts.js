@@ -11,26 +11,21 @@ var pokemonRepository = (function () {
 
         var $modal = $('.modal-body');
 
-        // var $closeButtonElement = $('.modal-close');
-        // $closeButtonElement.on('click', function (event) {
-        //     hideModal();
-        // })
-
-        var $titleElement = $('.modal-title');
-        $titleElement.append(title);
-
         var $contentElement = $('<img>');
         $contentElement.attr("src", text);
 
-        // $modal.append($closeButtonElement);
-        // $modal.append($titleElement);
+        var $titleElement = $('.modal-title');
+        if($titleElement.length) {
+            $titleElement.empty();
+            $modal.empty();
+        }
+        $titleElement.append(title);
+
         $modal.append($contentElement);
-        // $modalContainer.append($modal);
 
         $modalContainer.modal("show");
     };
 
-    / shouldn't this dismiss it?/
     function hideModal() {
         $modalContainer.modal("hide");
     };
