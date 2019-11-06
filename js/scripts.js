@@ -26,10 +26,7 @@ var pokemonRepository = (function () {
         var $contentElement = $('<img>');
         $contentElement.attr("src", text);
 
-        // $modal.append($closeButtonElement);
-        // $modal.append($titleElement);
         $modal.append($contentElement);
-        // $modalContainer.append($modal);
 
         $modalContainer.modal("show");
     };
