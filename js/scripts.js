@@ -27,11 +27,12 @@ var pokemonRepository = (function () {
         $modal.append($contentElement);
         // $modalContainer.append($modal);
 
-        $modalContainer.addClass("is-visible");
+        $modalContainer.modal("show");
     };
 
+    / shouldn't this dismiss it?/
     function hideModal() {
-        $modalContainer.removeClass("is-visible");
+        $modalContainer.modal("hide");
     };
 
     $(window).on("keydown", (e) => {
