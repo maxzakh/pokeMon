@@ -54,7 +54,7 @@ var pokemonRepository = (function () {
 
         var $listItem = $('<li>' + '</li>');
         $pokeList.append($listItem);
-        $pokeList.append($button);
+        $listItem.append($button);
 
         $button.on("click", function () {
             pokemonRepository.showDetails(pokemon);
