@@ -1,11 +1,13 @@
-var $pokeList = $(".pokeList");
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
+var $pokeList = $('.pokeList');
 
 var pokemonRepository = (function () {
     var repository = [];
     var apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
 
-    var $modalContainer = $("#modal-container");
+    var $modalContainer = $('#modal-container');
 
     function showModal(title, text) {
 
@@ -24,30 +26,30 @@ var pokemonRepository = (function () {
         $titleElement.append(title);
 
         var $contentElement = $('<img>');
-        $contentElement.attr("src", text);
+        $contentElement.attr('src', text);
 
         $modal.append($contentElement);
 
-        $modalContainer.modal("show");
-    };
+        $modalContainer.modal('show');
+    }
 
     function hideModal() {
-        $modalContainer.modal("hide");
-    };
+        $modalContainer.modal('hide');
+    }
 
-    $(window).on("keydown", (e) => {
-        if (e.key === "Escape" && $modalContainer.hasClass("is-visible")) {
+    $(window).on('keydown', (e) => {
+        if (e.key === 'Escape' && $modalContainer.hasClass('is-visible')) {
             hideModal();
         }
     });
 
-    $modalContainer.on("click", (e) => {
+    $modalContainer.on('click', (e) => {
         hideModal();
     });
 
     function add(pokemon) {
         repository.push(pokemon);
-    };
+    }
 
     function addListItem(pokemon) {
         var $button = $('<button class="btn pokeDex">' + pokemon.name + '</button>');
@@ -56,28 +58,28 @@ var pokemonRepository = (function () {
         $pokeList.append($listItem);
         $listItem.append($button);
 
-        $button.on("click", function () {
+        $button.on('click', function () {
             pokemonRepository.showDetails(pokemon);
         });
-    };
+    }
 
     function showDetails(pokemon) {
         pokemonRepository.loadDetails(pokemon).then(function() {
             console.log(pokemon);
             pokemonRepository.showModal(pokemon.name, pokemon.imageUrl);
         });
-    };
+    }
 
     function getAll() {
         return repository;
-    };
+    }
 
     function loadList() {
         return $.ajax(apiUrl, { dataType: 'json' }).then(function (responseJSON) {
             return responseJSON;
         }).then(function (response) {
             $.each(response.results, function (pokemon, item) {
-                var pokemon = {
+                pokemon = {
                     name: item.name,
                     detailsUrl: item.url
                 };
@@ -86,7 +88,7 @@ var pokemonRepository = (function () {
         }).catch(function (e) {
             console.error(e);
         })
-    };
+    }
 
     function loadDetails(item) {
         var url = item.detailsUrl;
@@ -99,7 +101,7 @@ var pokemonRepository = (function () {
         }).catch(function (e) {
             console.error(e);
         });
-    };
+    }
 
     return {
         add: add,
