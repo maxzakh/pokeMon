@@ -6,6 +6,11 @@ body {
     list-style-type: none;
 }
 
+ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .btn {
     width: 6em;
     padding: .375rem;
