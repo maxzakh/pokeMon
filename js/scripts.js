@@ -122,7 +122,5 @@ $gen1.on("click", function() {
                 pokemonRepository.addListItem(pokemon);
             });
         });
-    } else {
-        console.log("hello");
     }
 });
