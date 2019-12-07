@@ -11,6 +11,10 @@ ul {
   flex-wrap: wrap;
 }
 
+.gen1 {
+  height: 5%;
+}
+
 .btn {
     width: 6em;
     padding: .375rem;

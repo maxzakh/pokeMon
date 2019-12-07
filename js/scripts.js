@@ -113,8 +113,16 @@ var pokemonRepository = (function () {
     };
 })();
 
-pokemonRepository.loadList().then(function () {
-    pokemonRepository.getAll().forEach(function (pokemon) {
-        pokemonRepository.addListItem(pokemon);
-    });
+let $gen1 = $(".gen1")
+
+$gen1.on("click", function() {
+    if (($(".pokeList").contents().length == 0)) {
+        pokemonRepository.loadList().then(function () {
+            pokemonRepository.getAll().forEach(function (pokemon) {
+                pokemonRepository.addListItem(pokemon);
+            });
+        });
+    } else {
+        console.log("hello");
+    }
 });
