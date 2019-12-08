@@ -7,7 +7,7 @@ var pokemonRepository = (function () {
 
     var $modalContainer = $("#modal-container");
 
-    function showModal(title, text) {
+    function showModal(title, text, types) {
 
         var $modal = $(".modal-body");
         $modal.css("background-color", "blue");
@@ -28,6 +28,13 @@ var pokemonRepository = (function () {
         $contentElement.attr("src", text);
 
         $modal.append($contentElement);
+
+        var $types = $(".pokeTypes");
+        if($types.length) {
+            $types.empty();
+            $types.empty();
+        }
+        $types.append(types);
 
         $modalContainer.modal("show");
     }
@@ -65,7 +72,7 @@ var pokemonRepository = (function () {
     function showDetails(pokemon) {
         pokemonRepository.loadDetails(pokemon).then(function() {
             console.log(pokemon.types);
-            pokemonRepository.showModal(pokemon.name, pokemon.imageUrl);
+            pokemonRepository.showModal(pokemon.name, pokemon.imageUrl, pokemon.types);
         });
     }
 
