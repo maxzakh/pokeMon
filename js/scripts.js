@@ -64,7 +64,7 @@ var pokemonRepository = (function () {
 
     function showDetails(pokemon) {
         pokemonRepository.loadDetails(pokemon).then(function() {
-            console.log(pokemon);
+            console.log(pokemon.types);
             pokemonRepository.showModal(pokemon.name, pokemon.imageUrl);
         });
     }
