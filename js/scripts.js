@@ -10,6 +10,7 @@ var pokemonRepository = (function () {
     function showModal(title, text) {
 
         var $modal = $(".modal-body");
+        $modal.css("background-color", "blue");
 
         var $closeButtonElement = $(".modal-close");
         $closeButtonElement.on("click", function () {
@@ -95,7 +96,9 @@ var pokemonRepository = (function () {
         }).then(function (details) {
             item.imageUrl = details.sprites.front_default;
             item.height = details.height;
-            item.types = Object.keys(details.types);
+            item.types = details.types.map(function(pokemon) {
+                return pokemon.type.name;
+            });
         }).catch(function (e) {
             console.error(e);
         });
