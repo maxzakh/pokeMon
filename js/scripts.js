@@ -7,6 +7,10 @@ var pokemonRepository = (function () {
 
     var $modalContainer = $("#modal-container");
 
+    function capitalizeWord(word) {
+        return word[0].toUpperCase() + word.slice(1)
+    }
+
     function showModal(title, text, types) {
 
         var $modal = $(".modal-body");
@@ -17,24 +21,28 @@ var pokemonRepository = (function () {
             hideModal();
         })
 
-        var $titleElement = $(".modal-title");
-        if($titleElement.length) {
-            $titleElement.empty();
+
+        var pokeName = capitalizeWord(title);
+        var $modalTitle = $(".modal-title");
+        if($modalTitle.length) {
+            $modalTitle.empty();
             $modal.empty();
         }
-        $titleElement.append(title);
+        $modalTitle.append(pokeName);
 
-        var $contentElement = $("<img>");
-        $contentElement.attr("src", text);
-
+        var $contentElement = $("<img>").attr("src", text);
         $modal.append($contentElement);
+
+        var pokeTypes = types.join(", ");
+        // function capitalizeArray(pokeTypes) {
+
+        // }
 
         var $types = $(".pokeTypes");
         if($types.length) {
             $types.empty();
-            $types.empty();
         }
-        $types.append(types);
+        $types.append(pokeTypes);
 
         $modalContainer.modal("show");
     }
@@ -58,7 +66,8 @@ var pokemonRepository = (function () {
     }
 
     function addListItem(pokemon) {
-        var $button = $("<button class=\"btn pokeDex\">" + pokemon.name + "</button>");
+        var name = capitalizeWord(pokemon.name);
+        var $button = $("<button class=\"btn pokeDex\">" + name + "</button>");
 
         var $listItem = $("<li>" + "</li>");
         $pokeList.append($listItem);
@@ -71,7 +80,6 @@ var pokemonRepository = (function () {
 
     function showDetails(pokemon) {
         pokemonRepository.loadDetails(pokemon).then(function() {
-            console.log(pokemon.types);
             pokemonRepository.showModal(pokemon.name, pokemon.imageUrl, pokemon.types);
         });
     }
