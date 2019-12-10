@@ -11,6 +11,8 @@ var pokemonRepository = (function () {
         return word[0].toUpperCase() + word.slice(1)
     }
 
+    // var capitalizeArray = (element) => element.map(capitalizeWord).join("");
+
     function showModal(title, text, types) {
 
         var $modal = $(".modal-body");
@@ -34,10 +36,8 @@ var pokemonRepository = (function () {
         $modal.append($contentElement);
 
         var pokeTypes = types.join(", ");
-        // function capitalizeArray(pokeTypes) {
-
-        // }
-
+        capitalizeArray(pokeTypes);
+        console.log(pokeTypes);
         var $types = $(".pokeTypes");
         if($types.length) {
             $types.empty();
