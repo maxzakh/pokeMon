@@ -1,5 +1,21 @@
 var $pokeList = $(".pokeList");
 
+var normal = "#A8A77A",
+    fire = "#EE8130",
+    water = "#6390F0",
+    electric = "#F7D02C",
+    grass = "#7AC74C",
+    ice = "#96D9D6",
+    fighting = "#C22E28",
+    poison = "#A33EA1",
+    ground = "#E2BF65",
+    flying = "#A98FF3",
+    psychic = "#F95587",
+    bug = "#A6B91A",
+    rock = "#B6A136",
+    ghost = "#735797",
+    dragon = "#6F35FC";
+
 var pokemonRepository = (function () {
     var repository = [];
     var apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
@@ -11,22 +27,25 @@ var pokemonRepository = (function () {
         return word[0].toUpperCase() + word.slice(1);
     }
 
-    // var capitalizeArray = (element) => element.map(capitalizeWord).join("");
+    function capArray(arr) {
+
+        for (let i = 0; i < arr.length; i++) {
+            arr[i] = arr[i][0].toUpperCase() + arr[i].slice(1);
+        }
+    }
 
     function showModal(title, text, types) {
 
         var $modal = $(".modal-body");
-        $modal.css("background-color", "blue");
 
         var $closeButtonElement = $(".modal-close");
         $closeButtonElement.on("click", function () {
             hideModal();
         })
 
-
         var pokeName = capitalizeWord(title);
         var $modalTitle = $(".modal-title");
-        if($modalTitle.length) {
+        if ($modalTitle.length) {
             $modalTitle.empty();
             $modal.empty();
         }
@@ -35,13 +54,23 @@ var pokemonRepository = (function () {
         var $contentElement = $("<img>").attr("src", text);
         $modal.append($contentElement);
 
+        capArray(types);
+        
         var pokeTypes = types.join(", ");
-        console.log(pokeTypes);
-        types.map(function(item) {
-            return item.capitalizeWord();
-        });
+
+        console.log(types);
+
+        var color = pokeTypes.toLowerCase();
+        console.log(types.length);
+
+        if (types.length == 1) {
+            console.log(color);
+            // $modal.css("background-color", psychic);
+        }
+
+
         var $types = $(".pokeTypes");
-        if($types.length) {
+        if ($types.length) {
             $types.empty();
         }
         $types.append(pokeTypes);
@@ -81,7 +110,7 @@ var pokemonRepository = (function () {
     }
 
     function showDetails(pokemon) {
-        pokemonRepository.loadDetails(pokemon).then(function() {
+        pokemonRepository.loadDetails(pokemon).then(function () {
             pokemonRepository.showModal(pokemon.name, pokemon.imageUrl, pokemon.types);
         });
     }
@@ -113,7 +142,7 @@ var pokemonRepository = (function () {
         }).then(function (details) {
             item.imageUrl = details.sprites.front_default;
             item.height = details.height;
-            item.types = details.types.map(function(pokemon) {
+            item.types = details.types.map(function (pokemon) {
                 return pokemon.type.name;
             });
         }).catch(function (e) {
@@ -135,7 +164,7 @@ var pokemonRepository = (function () {
 
 let $gen1 = $(".gen1")
 
-$gen1.on("click", function() {
+$gen1.on("click", function () {
     if (($(".pokeList").contents().length == 0)) {
         pokemonRepository.loadList().then(function () {
             pokemonRepository.getAll().forEach(function (pokemon) {
