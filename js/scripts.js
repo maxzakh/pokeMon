@@ -1,20 +1,22 @@
 var $pokeList = $(".pokeList");
 
-var normal = "#A8A77A",
-    fire = "#EE8130",
-    water = "#6390F0",
-    electric = "#F7D02C",
-    grass = "#7AC74C",
-    ice = "#96D9D6",
-    fighting = "#C22E28",
-    poison = "#A33EA1",
-    ground = "#E2BF65",
-    flying = "#A98FF3",
-    psychic = "#F95587",
-    bug = "#A6B91A",
-    rock = "#B6A136",
-    ghost = "#735797",
-    dragon = "#6F35FC";
+var colors = {
+    normal: "#A8A77A",
+    fire: "#EE8130",
+    water: "#6390F0",
+    electric: "#F7D02C",
+    grass: "#7AC74C",
+    ice: "#96D9D6",
+    fighting: "#C22E28",
+    poison: "#A33EA1",
+    ground: "#E2BF65",
+    flying: "#A98FF3",
+    psychic: "#F95587",
+    bug: "#A6B91A",
+    rock: "#B6A136",
+    ghost: "#735797",
+    dragon: "#6F35FC",
+};
 
 var pokemonRepository = (function () {
     var repository = [];
@@ -58,16 +60,22 @@ var pokemonRepository = (function () {
         
         var pokeTypes = types.join(", ");
 
-        console.log(types);
-
-        var color = pokeTypes.toLowerCase();
-        console.log(types.length);
-
-        if (types.length == 1) {
-            console.log(color);
-            // $modal.css("background-color", psychic);
-        }
-
+        var $button = $(".btn");
+        var color1;
+        var color2;
+        types.forEach(type => {
+            if (types.length == 2) {
+                color1 = colors[types[0].toLowerCase()];
+                color2 = colors[types[1].toLowerCase()];
+                $button.css({
+                    "background" : "linear-gradient(to right," + color1 + ", " + color2 + ")"
+                });
+            } if (types.length == 1) {
+                $button.css("background", "transparent");
+                color1 = colors[types[0].toLowerCase()];
+                $button.css("background-color", color1);
+            }
+        });
 
         var $types = $(".pokeTypes");
         if ($types.length) {
