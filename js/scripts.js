@@ -18,6 +18,9 @@ var colors = {
     dragon: "#6F35FC",
 };
 
+var color1;
+var color2;
+
 var pokemonRepository = (function () {
     var repository = [];
     var apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
@@ -57,23 +60,20 @@ var pokemonRepository = (function () {
         $modal.append($contentElement);
 
         capArray(types);
-        
+
         var pokeTypes = types.join(", ");
 
-        var $button = $(".btn");
-        var color1;
-        var color2;
         types.forEach(type => {
             if (types.length == 2) {
                 color1 = colors[types[0].toLowerCase()];
                 color2 = colors[types[1].toLowerCase()];
-                $button.css({
-                    "background" : "linear-gradient(to right," + color1 + ", " + color2 + ")"
+                $modal.css({
+                    "background": "linear-gradient(to right," + color1 + ", " + color2 + ")"
                 });
             } if (types.length == 1) {
-                $button.css("background", "transparent");
+                $modal.css("background", "transparent");
                 color1 = colors[types[0].toLowerCase()];
-                $button.css("background-color", color1);
+                $modal.css("background-color", color1);
             }
         });
 
@@ -107,6 +107,7 @@ var pokemonRepository = (function () {
     function addListItem(pokemon) {
         var name = capitalizeWord(pokemon.name);
         var $button = $("<button class=\"btn pokeDex\">" + name + "</button>");
+        $button.css("background", color1)
 
         var $listItem = $("<li>" + "</li>");
         $pokeList.append($listItem);
